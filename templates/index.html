@@ -3,84 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day4 - 前端页面与扩展语法</title>
-    <!-- 1. 引入Highlight.js CSS（代码高亮样式） -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.css">
-    <!-- 2. 引入自定义CSS（左右分栏样式） -->
-    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Markdown实时预览服务</title>
+    <!-- 引入自定义样式 -->
+    <link rel="stylesheet" href="/static/style.css">
+    <!-- 代码高亮CSS（Github主题） -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <!-- 数学公式MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
     <div class="container">
-        <!-- 左侧栏 -->
-        <div class="left-column">
-            <h2>左侧内容栏</h2>
-            <p>这里是左侧分栏区域，可放置导航、目录等内容。</p>
-            <!-- 示例：普通文本 -->
-            <p>测试普通文本内容</p>
+        <!-- 左侧编辑区 -->
+        <div class="editor-wrapper">
+            <h3>Markdown 编辑区</h3>
+            <textarea id="markdown-editor" placeholder="请在此输入Markdown内容..."></textarea>
         </div>
 
-        <!-- 右侧栏（核心展示区） -->
-        <div class="right-column">
-            <h2>右侧内容栏（代码高亮 + 公式渲染）</h2>
-
-            <!-- 🔹 扩展语法1：代码高亮 -->
-            <h3>1. 代码高亮示例（Python）</h3>
-            <pre><code class="language-python">
-# 快速排序算法
-def quick_sort(arr):
-    if len(arr) <= 1:
-        return arr
-    pivot = arr[len(arr) // 2]
-    left = [x for x in arr if x < pivot]
-    middle = [x for x in arr if x == pivot]
-    right = [x for x in arr if x > pivot]
-    return quick_sort(left) + middle + quick_sort(right)
-
-# 测试
-if __name__ == "__main__":
-    test_arr = [3, 6, 8, 10, 1, 2, 1]
-    print(quick_sort(test_arr))
-            </code></pre>
-
-            <h3>代码高亮示例（JavaScript）</h3>
-            <pre><code class="language-javascript">
-// 防抖函数
-function debounce(fn, delay) {
-    let timer = null;
-    return function(...args) {
-        clearTimeout(timer);
-        timer = setTimeout(() => fn.apply(this, args), delay);
-    };
-}
-
-// 使用
-const handleInput = debounce((e) => {
-    console.log("输入内容：", e.target.value);
-}, 500);
-            </code></pre>
-
-            <!-- 🔹 扩展语法2：公式渲染（MathJax） -->
-            <h3>2. 数学公式渲染示例</h3>
-            <p>行内公式：欧拉公式 \( e^{i\pi} + 1 = 0 \)</p>
-            <p>块级公式（牛顿-Leibniz公式）：</p>
-            \[
-            \int_{a}^{b} f(x) dx = F(b) - F(a)
-            \]
-            <p>二次函数求根公式：</p>
-            \[
-            x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \quad (a \neq 0)
-            \]
+        <!-- 右侧预览区 -->
+        <div class="preview-wrapper">
+            <h3>实时预览区</h3>
+            <div id="preview-container"></div>
         </div>
     </div>
 
-    <!-- 3. 引入Highlight.js JS（初始化代码高亮） -->
-    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/lib/highlight.min.js"></script>
-    <!-- 4. 引入MathJax（公式渲染） -->
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
-
-    <!-- 初始化Highlight.js -->
-    <script>
-        hljs.highlightAll(); // 高亮所有<code>标签
-    </script>
+    <!-- 引入交互逻辑 -->
+    <script src="/static/script.js"></script>
+    <!-- 代码高亮JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 </body>
 </html>
